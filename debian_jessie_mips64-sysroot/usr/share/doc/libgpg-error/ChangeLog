@@ -1,0 +1,334 @@
+2014-04-15  Werner Koch  <wk@gnupg.org>
+
+	Release 1.13.
+	* configure.ac: Set LT version to C11/A11/R0.
+
+	Update pl.po.
+
+	Add code GPG_ERR_KEY_ON_CARD.
+
+2014-01-29  Werner Koch  <wk@gnupg.org>
+
+	Fix a syscfg/ file name.
+	* src/syscfg/lock-obj.arm-unknown-linux-androideabi.h: Rename to ...
+	* src/syscfg/lock-obj-pub.arm-unknown-linux-androideabi.h: this.
+	* src/Makefile.am (lock_obj_pub): Fix file name.
+
+2014-01-28  Werner Koch  <wk@gnupg.org>
+
+	Fix the name of the file in the comment of the output.
+	* src/gen-posix-lock-obj.c (main): Chnage comment in created file.
+
+2014-01-25  Werner Koch  <wk@gnupg.org>
+
+	Add lock info for arm-unknown-linux-androideabi.
+	* src/syscfg/lock-obj.arm-unknown-linux-androideabi.h: New.  Provided
+	by Hans-Christoph Steiner.
+	* src/Makefile.am (lock_obj_pub): Add file.
+
+2014-01-24  Werner Koch  <wk@gnupg.org>
+
+	tests: Call srand for each thread under Windows.
+	* tests/t-lock.c (accountant_thread) [W32]: Call srand.
+
+	Do not use the threadlib macros for Windows.
+	* configure.ac: Move platform detection before gl_THREADLIB_EARLY.  Do
+	not use gl_THREADLIB for Windows.
+
+	Make multi-threading flags available via gpg-error-config.
+	* m4/threadlib.m4: Set THREADLIB_CPPFLAGS.
+	* src/gpg-error-config.in: Add option --mt.
+	* configure.ac: Add support for the --mt option.
+	* src/gpg-error.m4: Add ac_subst GPG_ERROR_MT_CFLAGS and
+	GPG_ERROR_MT_LIBS.
+
+	Allow using gpgrt_lock_init on an unitialized variable.
+	* src/posix-lock.c (gpgrt_lock_init): Detect unitialized lock var.
+	* src/w32-lock.c (gpgrt_lock_init): Ditto.
+
+2014-01-17  Werner Koch  <wk@gnupg.org>
+
+	Move version number first in the Posix lock-obj.
+	* src/posix-lock-obj.h (_gpgrt_lock_t): Swap VERS and MTX and put MTX
+	into a union.
+	* src/posix-lock.c (gpgrt_lock_lock): Adjust for this change.
+	* src/gen-posix-lock-obj.c (main): Change output accordingly.
+
+	Extend the platform dependent build rules.
+	* src/mkheader.c (mk_include_name): New.
+	(include_file): Implement '&' substitution.
+	(try_include_file): New.
+	(write_special): Use try_include_file and syscfg/.
+	(main): Add a new arg.
+	* configure.ac (CROSS_COMPILING): New am_conditional.
+	(HOST_TRIPLET_STRING): New ac_define.
+	* src/gen-posix-lock-obj.c (main): Print the host triplet.
+	* src/w32-lock-obj-pub.in: Move to ...
+	* src/syscfg/lock-obj-pub.mingw32.h: here.
+	* src/Makefile.am (lock_obj_pub): New.
+	(pre_mkheader_cmds): New.
+	(gpg-error.h): Run pre_mkheader_cmds.
+	(parts_of_gpg_error_h, lock-obj-pub.native.h): Do not use when
+	cross-compiling.
+
+2014-01-16  Werner Koch  <wk@gnupg.org>
+
+	Fix linking for last change on non-ELF platforms.
+	* src/Makefile.am (libgpg_error_la_LIBADD): Add LIBTHREAD.
+
+	Add gpgrt_lock_ functions.
+	* src/gpg-error.h.in (GPGRT_LOCK_DEFINE): New.
+	(gpgrt_lock_init): New.
+	(gpgrt_lock_lock): New.
+	(gpgrt_lock_unlock): New.
+	(gpgrt_lock_destroy): New.
+	(gpgrt_yield): New.
+	* src/gpg-error.def.in: Add new functions.
+	* m4/lock.m4, m4/threadlib.m4: New. Taken from current gnulib.
+	* configure.ac: Call gl_LOCK.  Check size of pthread_mutex_t. Add
+	LIBTHREAD to GPG_ERROR_CONFIG_LIBS.
+	* src/err-codes.h.in (GPG_ERR_INV_LOCK_OBJ): New.
+	* src/gen-posix-lock-obj.c: New.
+	* src/gen-w32-lock-obj.c: New.
+	* src/lock.h, src/thread.h: New.
+	* src/posix-lock-obj.h, src/w32-lock-obj.h: New.
+	* src/posix-lock.c, src/w32-lock.c: New.
+	* src/posix-thread.c, src/w32-thread.c:
+	* src/w32-lock-obj-pub.in: New.
+	* src/mkheader.c (include_file): Support build time include files.
+	(write_special): Add keyword "include:lock-obj".
+	* src/Makefile.am:
+	(posix-lock-obj-pub.in): New rule.
+	(noinst_PROGRAMS): Add gen-*-lock-obj helpers.
+
+	* tests/t-common.h: New.
+	* tests/t-lock.c: New.
+	* tests/Makefile.am (t_lock_LDADD): Add new test.
+
+2014-01-14  Werner Koch  <wk@gnupg.org>
+
+	Improve maintainability by rewriting the mkheader helper.
+	* src/mkheader.c: New.  Based on the mkheader from Libassuan.
+	* src/mkheader.awk: Remove.
+	* src/errnos.in: Add trailing linefeed.
+	* src/gpg-error.h.in: Change meta include directives for use with
+	mkheader.c.
+	* src/Makefile.am (EXTRA_DIST): Replace mkheader.awk by mkheader.c
+	(BUILT_SOURCES): Remove extra-h.in.
+	(CLEANFILES): Remove extra-h.in.  Add mkheader.c.
+	(parts_of_gpg_error_h): New.
+	(extra-h.in): Remove rule.
+	(mkheader): Add rule.
+	(gpg-error.h): Change rule to use mkheader.
+
+2014-01-10  Werner Koch  <wk@gnupg.org>
+
+	po: Update de.po.
+
+	Use the generic autogen.sh script.
+	* Makefile.am (EXTRA_DIST): Add autogen.rc remove config.rpath.
+	* autogen.rc: New.
+	* autogen.sh: Update from current GnuPG.
+
+	Move helper scripts to build-aux.
+	* compile, config.guess, config.rpath, config.sub
+	* depcomp, install-sh, ltmain.sh, missing: Move to build-aux/.
+	* configure.ac (AC_CONFIG_AUX_DIR): New.
+
+2013-12-09  Werner Koch  <wk@gnupg.org>
+
+	Add build support for ppc64le.
+	* config.guess, config.sub: Update to latest version (2013-11-29).
+	* m4/libtool.m4: Add patches for ppc64le.
+
+2013-12-09  David 'Digit' Turner  <digit@google.com>
+
+	Update libtool to support Android.
+	* m4/libtool.m4: Add "linux*android*" case.  Taken from the libtool
+	repository.
+
+2013-11-17  Werner Koch  <wk@gnupg.org>
+
+	Add GPG_ERR_MAC_ALGO.
+
+2013-07-15  Werner Koch  <wk@gnupg.org>
+
+	w32: Fix corrupted string output.
+	* src/w32-gettext.c (get_string): Pass the nul of the utf-8 string to
+	the conversion function but keep TRANSLEN without the nul.
+
+2013-06-24  Werner Koch  <wk@gnupg.org>
+
+	Release 1.12.
+	* configure.ac: Set LT version to C10/A10/R0.
+
+	Update German translation.
+
+2013-06-17  Werner Koch  <wk@gnupg.org>
+
+	Add hack to have different names for 64 bit Windows DLLs.
+	* ltmain.sh: Prefix the SO number for W64 with a "6".
+
+	Support building for w64.
+
+2013-05-23  Werner Koch  <wk@gnupg.org>
+
+	w32: Fix installing of .def file.
+	* src/Makefile.am (install-def-file): Create libdir first.
+
+	Fix libtool 2.4.2 to correctly detect .def files.
+	* ltmain.sh (sed_uncomment_deffile): New.
+	(orig_export_symbols): Uncomment def file before testing for EXPORTS.
+	* m4/libtool.m4: Do the same for the generated code.
+
+2013-04-11  Werner Koch  <wk@gnupg.org>
+
+	Add GPG_ERR_*CRYPT_CTX* and GPG_ERR_BROKEN_*KEY.
+	* src/err-codes.h.in (GPG_ERR_NO_CRYPT_CTX): New.
+	(GPG_ERR_WRONG_CRYPT_CTX, GPG_ERR_BAD_CRYPT_CTX): New.
+	(GPG_ERR_CRYPT_CTX_CONFLICT): New.
+	(GPG_ERR_BROKEN_PUBKEY, GPG_ERR_BROKEN_SECKEY): New.
+
+2013-02-25  Werner Koch  <wk@gnupg.org>
+
+	Release 1.11.
+	* configure.ac: Set LT version to C9/A9/R0.
+
+	* Makefile.am (GITLOG_TO_CHANGELOG): New.
+	(gen-ChangeLog): Use --tear-off.
+	* build-aux/gitlog-to-changelog: Remove.
+
+	Update helper scripts.
+	* compile, config.guess, config.rpath, config.sub, depcomp,
+	* install-sh, mkinstalldirs: Update to current versions from gnulib.
+
+2013-02-23  Werner Koch  <wk@gnupg.org>
+
+	Add translation to Ukrainian.
+	* po/uk.po: New.
+	* po/LINGUAS: Add uk.po
+
+	Add translation to Esperanto.
+	* po/eo.po: New.
+	* po/LINGUAS: Add eo.po.
+
+	Add version macros and check function.
+	* configure.ac (VERSION_NUMBER): New ac_subst.
+	(BUILD_FILEVERSION): Build on all platforms
+	(BUILD_TIMESTAMP): Try to use an ISO string.
+	* src/Makefile.am (extra-h.in): Add new version numbers.
+	* src/versioninfo.rc.in: Update copyright year.
+	* src/version.c: New.
+	(gpg_error_check_version): New API.
+	* src/gpg-error.h.in: Add gpg_error_check_version prototype.
+	* src/gpg-error.def.in: Add gpg_error_check_version
+	* tests/t-version.c: New.
+	* tests/Makefile.am (TESTS): Add t-version.c
+
+	* src/gpg-error-config.in: s/VERSION/PACKAGE_VERSION/.
+
+2013-02-22  Werner Koch  <wk@gnupg.org>
+
+	Fix the alias mechanism for --with-libgpg-error-prefix.
+	* src/gpg-error.m4: Do not use the no-action branch in AC_ARG_WITH.
+
+2012-11-16  Werner Koch  <wk@gnupg.org>
+
+	Switch to the new automagic beta numbering scheme.
+	* configure.ac: Change to a git only revision id setup.
+	(BUILD_FILEVERSION): Use revision id for this.
+	* src/versioninfo.rc.in (FileVersion): Use LT version.
+
+	Update to libtool 2.4.2.
+
+	Add new source id for Libassuan.
+	* src/err-sources.h.in (GPG_ERR_SOURCE_ASSUAN): New.
+
+	Improve parsing of the GIT revision number.
+	* configure.ac (git_revision): Use git rev-parse.
+
+	Fix non-portable use of chmod in autogen.sh.
+	* autogen.sh: Remove option -c from chmod.
+
+2012-08-09  Werner Koch  <wk@gnupg.org>
+
+	Update Italian translation.
+
+2012-08-09  Jordy Provost  <jordy.provost@free.fr>
+
+	Typo fix.
+	* src/err-codes.h.in: Unify uppercase.
+
+2012-08-09  Freek de Kruijf  <f.de.kruijf@gmail.com>
+
+	Update Dutch translation.
+	* po/nl.po: Update.
+
+2012-08-09  Petr Pisar  <petr.pisar@atlas.cz>
+
+	Update Czech translation.
+	* po/cs.po: Update.
+
+2012-08-09  Joe Hansen  <joedalton2@yahoo.dk>
+
+	Add Danish translation.
+	* po/da.po: New.
+	* po/LINGUAS: Add da.po.
+
+2012-08-09  David Prévot  <taffit@debian.org>
+
+	Update French translation.
+	* po/fr.po: Update, proofread by Jordy Provost
+
+	Keep previous msgids of translated messages.
+	* po/Makefile.in.in: Add --previous option to msgmerge.
+
+2012-08-07  Werner Koch  <wk@gnupg.org>
+
+	Add Japanese translation.
+	* po/ja.po: New.
+	* po/LINGUAS: Add ja.po.
+
+	Update German translation.
+	* po/de.po: Update.
+
+2012-06-20  Rafaël Carré  <funman@videolan.org>
+
+	Use CPPFLAGS when generating mkerrcodes.h.
+	 * src/Makefile.am (mkerrcodes.h): Use CPPFLAGS.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	Remove non-source file from the repo.
+	* po/remove-potcdate.sed: Remove.
+
+	Fix for newer autoconf version.
+	* Makefile.am (EXTRA_DIST): Fix filename.
+	* configure.ac (my_full_version): New.
+	(AC_INIT):  Use new macro.  Change bug address to the bug tracker URL.
+
+	Generate the ChangeLog from commit logs.
+	* build-aux/gitlog-to-changelog: New script.  Taken from gnulib.
+	* build-aux/git-log-fix: New file.
+	* build-aux/git-log-footer: New file.
+	* doc/HACKING: New file.
+	* ChangeLog: New file.
+	* Makefile.am (EXTRA_DIST): Add new files.
+	(gen-ChangeLog): New.
+	(dist-hook): Run gen-ChangeLog.
+
+	Rename all ChangeLog files to ChangeLog-2011.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	NB: Changes done before December 1st, 2011 are described in
+	per directory files named ChangeLog-2011.  See doc/HACKING for
+	details.
+
+        -----
+	Copyright (C) 2011 Free Software Foundation, Inc.
+
+	Copying and distribution of this file and/or the original GIT
+	commit log messages, with or without modification, are
+	permitted provided the copyright notice and this notice are
+	preserved.

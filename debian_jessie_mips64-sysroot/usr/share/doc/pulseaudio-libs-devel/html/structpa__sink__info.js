@@ -1,0 +1,27 @@
+var structpa__sink__info =
+[
+    [ "active_port", "structpa__sink__info.html#a7d647287738c7a9f6cfefa9a94695f76", null ],
+    [ "base_volume", "structpa__sink__info.html#a2332e2ca20f797f65162fe725cc6e0fd", null ],
+    [ "card", "structpa__sink__info.html#a18371dac55a1163c3f616d1f92d58706", null ],
+    [ "channel_map", "structpa__sink__info.html#a63d52fb9c811644ab6179a49dbcdc330", null ],
+    [ "configured_latency", "structpa__sink__info.html#a5043ee6996ea976e51a26a2c2b13120e", null ],
+    [ "description", "structpa__sink__info.html#ac2bb6605579c4962511eed3c113962ee", null ],
+    [ "driver", "structpa__sink__info.html#ab3a090937bf1389a7ffb7583065a136b", null ],
+    [ "flags", "structpa__sink__info.html#a3c9f43295084e6dddb4d3e12cdb69220", null ],
+    [ "formats", "structpa__sink__info.html#a58a75909997e5c5473a471cb9b373011", null ],
+    [ "index", "structpa__sink__info.html#a18fd50e556478fdec857fead7d2ded04", null ],
+    [ "latency", "structpa__sink__info.html#a872cc1f311330e161f9b7990200b8b21", null ],
+    [ "monitor_source", "structpa__sink__info.html#ad9946f956c2c67a47b4446f8034c3f2d", null ],
+    [ "monitor_source_name", "structpa__sink__info.html#a59dc10c527bb0b837b4d937a901cdd4f", null ],
+    [ "mute", "structpa__sink__info.html#ab73ed639790cce4fc11ea4991c651691", null ],
+    [ "n_formats", "structpa__sink__info.html#a9099af342936f6b9a761eac32043833c", null ],
+    [ "n_ports", "structpa__sink__info.html#a1f8367507f97690c982180a81105ef8b", null ],
+    [ "n_volume_steps", "structpa__sink__info.html#a18b1010e061aada3d2d8cab1874c75ce", null ],
+    [ "name", "structpa__sink__info.html#a66f0e7dd799c8c7cf800c481a2866276", null ],
+    [ "owner_module", "structpa__sink__info.html#a95aaf34a3dcc08486df1e31947d87617", null ],
+    [ "ports", "structpa__sink__info.html#ad4a7c0bd0dd2492cb70ee7bf340c7939", null ],
+    [ "proplist", "structpa__sink__info.html#aca4c6228ebbcae6c05e5288945867cda", null ],
+    [ "sample_spec", "structpa__sink__info.html#a178d2358c2ed17a6ae6088f9cd79cc7a", null ],
+    [ "state", "structpa__sink__info.html#ae10dc516faa471cdcba1ef03c75c209e", null ],
+    [ "volume", "structpa__sink__info.html#ae319476958f091f92f1a97a983363767", null ]
+];

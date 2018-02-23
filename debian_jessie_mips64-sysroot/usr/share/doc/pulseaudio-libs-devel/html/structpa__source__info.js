@@ -1,0 +1,27 @@
+var structpa__source__info =
+[
+    [ "active_port", "structpa__source__info.html#aa3c5a492e7df90704734cfbeb78955a6", null ],
+    [ "base_volume", "structpa__source__info.html#a9a0954875670adbe13c041eda723348b", null ],
+    [ "card", "structpa__source__info.html#a6f7628bf54e546011b6e120a4d4c1183", null ],
+    [ "channel_map", "structpa__source__info.html#aa5421702ef8229d3ca4225e6e8d14033", null ],
+    [ "configured_latency", "structpa__source__info.html#a9d18ad1b45483014c84055ddce0b5e7d", null ],
+    [ "description", "structpa__source__info.html#ac67e3147b1560c94fb215e265afdf077", null ],
+    [ "driver", "structpa__source__info.html#a330b6032ab2411e38c84bfd102677aed", null ],
+    [ "flags", "structpa__source__info.html#afe48c018865c45058174e9ba2ef7356f", null ],
+    [ "formats", "structpa__source__info.html#afb02f39227295d9c33fdf928be53ae24", null ],
+    [ "index", "structpa__source__info.html#aaea5cb728eff6a6e47fd4b2a57c68800", null ],
+    [ "latency", "structpa__source__info.html#a5ed69b0cede6c4f9508ebca50a79c1ba", null ],
+    [ "monitor_of_sink", "structpa__source__info.html#a5e304b796ce71c7fa54e5a88f3333630", null ],
+    [ "monitor_of_sink_name", "structpa__source__info.html#a57574e2d67787b7c7a742ea742577880", null ],
+    [ "mute", "structpa__source__info.html#abcadbb57169622929271f2c106ccb3bf", null ],
+    [ "n_formats", "structpa__source__info.html#ac819612948940ca727171979d42840e1", null ],
+    [ "n_ports", "structpa__source__info.html#a4771fc3e39db22946ef278d8cf8170f7", null ],
+    [ "n_volume_steps", "structpa__source__info.html#a079323d09fdbce973533b791b792cfcc", null ],
+    [ "name", "structpa__source__info.html#a61afc17239989ccac42c9b143c8dafbd", null ],
+    [ "owner_module", "structpa__source__info.html#aa0478463eb67bf22f724a25b07e544e3", null ],
+    [ "ports", "structpa__source__info.html#a97efff6db2851bc811a31384981a1b0b", null ],
+    [ "proplist", "structpa__source__info.html#a18fd48b4f94232408c5896fa3cb48aa9", null ],
+    [ "sample_spec", "structpa__source__info.html#a31aa76b7f145f448472e065b08df238d", null ],
+    [ "state", "structpa__source__info.html#a4fc4bd5fe3ce3226f04b11270d26ffeb", null ],
+    [ "volume", "structpa__source__info.html#a14feca3480affae3bb15c5cb3400dce3", null ]
+];

@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+includedir=/usr/include
+modlibexecdir=/usr/lib64/pulse-6.0/modules
+
+Name: libpulse
+Description: PulseAudio Client Interface
+Version: 6.0
+Libs: -L${libdir} -lpulse 
+Libs.private: -L${libdir}/pulseaudio -lpulsecommon-6.0
+Cflags: -I${includedir} -D_REENTRANT

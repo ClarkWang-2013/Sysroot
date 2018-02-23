@@ -1,0 +1,11 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=/usr/lib64
+includedir=/usr/include/nss3
+
+Name: NSS-UTIL
+Description: Network Security Services Utility Library
+Version: 3.18.0
+Requires: nspr >= 4.10.8
+Libs: -L${libdir} -lnssutil3
+Cflags: -I${includedir}
